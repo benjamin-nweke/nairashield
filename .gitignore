@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+dist/
+*.egg-info/
+
+# Configuration and Secrets
+.env
+.env.*
+! .env.example
+users.json
+
+# Databases and Logs
+*.db
+*.log
+drift_monitor.db
+drift_monitor.log
+alerts_log.json
+
+# Generated Reports
+nairashield_fraud_report.pdf
+nairashield_fraud_report*.pdf
+scratch/test_downloaded_report.pdf
+
+# OS and IDE Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.project
+.pydevproject

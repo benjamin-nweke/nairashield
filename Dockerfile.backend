@@ -1,0 +1,27 @@
+FROM python:3.11-slim
+
+# Install system dependencies required for compilation and running ML models
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libgomp1 \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy dependency definition
+COPY requirements.txt .
+
+# Install dependencies using the specified mirror registry
+RUN pip install --no-cache-dir --index-url https://pypi.tuna.tsinghua.edu.cn/simple/ -r requirements.txt
+RUN pip install --no-cache-dir --index-url https://pypi.tuna.tsinghua.edu.cn/simple/ gunicorn
+
+# Copy all codebase files
+COPY . .
+
+# Expose the Flask port
+EXPOSE 5000
+
+# Default CMD runs Flask API. Users can override this to run the stream_transactions worker.
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "api:app"]
