@@ -34,8 +34,11 @@ except ImportError as e:
     print(f"[Error] Failed to load REST API module: {e}")
     sys.exit(1)
 
+import os
+port_number = int(os.environ.get("PORT", 5000))
+
 if api.FLASK_AVAILABLE:
-    api.start_flask_server(5000)
+    api.start_flask_server(port_number)
 else:
-    api.start_fallback_server(5000)
+    api.start_fallback_server(port_number)
 

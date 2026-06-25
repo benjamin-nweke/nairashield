@@ -718,7 +718,7 @@ else:
 
 
 if __name__ == "__main__":
-    port_number = 5000
+    port_number = int(os.environ.get("PORT", 5000))
     if FLASK_AVAILABLE:
         start_flask_server(port_number)
     else:
